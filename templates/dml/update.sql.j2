@@ -1,0 +1,9 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+{% import "_macros/values.sql.j2" as vals %}
+
+UPDATE {{ id.fq_table(table) }}
+SET
+{%- for k, v in set.items() %}
+  {{ k }} = {{ vals.sql_value(v) }}{{ "," if not loop.last else "" }}
+{%- endfor %}
+{% if where %}WHERE {{ where.sql }}{% endif %}

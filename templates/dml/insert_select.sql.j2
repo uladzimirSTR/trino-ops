@@ -1,0 +1,5 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+INSERT INTO {{ id.fq_table(table) }}{% if columns %} ({{ columns | join(", ") }}){% endif %}
+
+{{ select_sql }}

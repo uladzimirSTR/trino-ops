@@ -1,0 +1,6 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+{% import "_macros/props.sql.j2" as props %}
+{% import "_macros/paths.sql.j2" as paths %}
+
+CREATE SCHEMA {% if if_not_exists %}IF NOT EXISTS {% endif %}{{ id.fq_schema(table_schema.catalog, table_schema.name) }}
+{{ props.with_props({"location": paths.s3_join(table_schema.location, [table_schema.name])}) }}

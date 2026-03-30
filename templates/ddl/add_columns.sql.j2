@@ -1,0 +1,8 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+ALTER TABLE {{ id.fq_table(table) }}
+ADD COLUMN (
+{%- for c in columns %}
+  {{ id.qident(c.colname) }} {{ c.coltype }}{{ "," if not loop.last else "" }}
+{%- endfor %}
+)

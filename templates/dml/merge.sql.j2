@@ -1,0 +1,15 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+MERGE INTO {{ id.fq_table(target) }} AS t
+USING {{ source_sql }} AS s
+ON {{ on }}
+{% if when_matched %}
+  {%- for clause in when_matched %}
+WHEN MATCHED THEN {{ clause }}
+  {%- endfor %}
+{% endif %}
+{% if when_not_matched %}
+  {%- for clause in when_not_matched %}
+WHEN NOT MATCHED THEN {{ clause }}
+  {%- endfor %}
+{% endif %}

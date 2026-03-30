@@ -1,0 +1,27 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+{% import "_macros/props.sql.j2" as props %}
+{% import "_macros/paths.sql.j2" as paths %}
+
+{# Build WITH props: base properties + storage props #}
+{% set with_map = table.table_prop.copy() if table.table_prop else {} %}
+{% set _ = with_map.update({"format": table.table_prop.format}) %}
+
+
+{% set default_loc = paths.s3_join(table.table_schema.location, [table.table_schema.name, table.table_name]) %}
+
+{% if table.table_prop.partitioned_by and (table.table_prop.partitioned_by|length) > 0 %}
+  {% set _ = with_map.update({"partitioned_by": table.table_prop.partitioned_by}) %}
+  {# set default_loc = paths.s3_join(default_loc, ['*']) #}
+{% endif %}
+
+{% if default_loc %}
+  {% set _ = with_map.update({"external_location": default_loc}) %}
+{% endif %}
+
+
+CREATE TABLE {% if if_not_exists %}IF NOT EXISTS {% endif %}{{ id.fq_table(table) }} (
+{%- for c in table.columns %}
+  {{ id.qident(c.colname) }} {{ c.coltype }}{% if c.comment %} COMMENT '{{ c.comment | replace("'", "''") }}'{% endif %}{{ "," if not loop.last else "" }}
+{%- endfor %}
+)
+{{ props.with_props(with_map) }}

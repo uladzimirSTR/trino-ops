@@ -1,0 +1,5 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+{% import "_macros/props.sql.j2" as props %}
+
+ALTER TABLE {{ id.fq_table(table) }}
+{{ props.set_props({"external_location": external_location}) }}

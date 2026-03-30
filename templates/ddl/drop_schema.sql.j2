@@ -1,0 +1,3 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+DROP SCHEMA {% if if_exists %}IF EXISTS {% endif %}{{ id.fq_schema(table_schema.catalog, table_schema.name) }}{% if cascade %} CASCADE{% endif %}

@@ -1,0 +1,3 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+DROP TABLE {% if if_exists %}IF EXISTS {% endif %}{{ id.fq_table(table) }}

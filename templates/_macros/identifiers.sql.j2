@@ -1,0 +1,12 @@
+{# -------- Identifier quoting -------- #}
+{% macro qident(name) -%}
+"{{ name }}"
+{%- endmacro %}
+
+{% macro fq_schema(catalog, schema) -%}
+{{ qident(catalog) }}.{{ qident(schema) }}
+{%- endmacro %}
+
+{% macro fq_table(table_ref) -%}
+{{ fq_schema(table_ref.table_schema.catalog, table_ref.table_schema.name) }}.{{ qident(table_ref.table_name) }}
+{%- endmacro %}

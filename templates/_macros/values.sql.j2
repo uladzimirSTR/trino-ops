@@ -1,0 +1,72 @@
+{# -------- Value rendering -------- #}
+
+{% macro sql_string(s) -%}
+'{{ (s | string) | replace("'", "''") }}'
+{%- endmacro %}
+
+{% macro sql_array(seq) -%}
+ARRAY[
+{%- for x in seq -%}
+  {{ sql_value(x) }}{{ ", " if not loop.last else "" }}
+{%- endfor -%}
+]
+{%- endmacro %}
+
+{% macro sql_row(items) -%}
+ROW(
+{%- for x in items -%}
+  {{ sql_value(x) }}{{ ", " if not loop.last else "" }}
+{%- endfor -%}
+)
+{%- endmacro %}
+
+{% macro sql_map(keys, values) -%}
+MAP({{ sql_array(keys) }}, {{ sql_array(values) }})
+{%- endmacro %}
+
+{% macro sql_json_parse(json_text) -%}
+JSON_PARSE({{ sql_string(json_text) }})
+{%- endmacro %}
+
+{% macro sql_cast(expr, type_sql) -%}
+CAST({{ sql_value(expr) }} AS {{ type_sql }})
+{%- endmacro %}
+
+{% macro sql_value(v) -%}
+{%- if v is boolean -%}
+{{ "TRUE" if v else "FALSE" }}
+{%- elif v is number -%}
+{{ v }}
+{%- elif v is none -%}
+NULL
+{# --- wrappers by class name --- #}
+
+{%- elif v.__class__.__name__ == "SqlExpr" -%}
+{{ v.sql }}
+
+{%- elif v.__class__.__name__ == "Cast" -%}
+{{ sql_cast(v.expr, v.type_sql) }}
+
+{%- elif v.__class__.__name__ == "RowLiteral" -%}
+{{ sql_row(v.items) }}
+
+{%- elif v.__class__.__name__ == "MapLiteral" -%}
+{{ sql_map(v.keys, v.values) }}
+
+{%- elif v.__class__.__name__ == "JsonLiteral" -%}
+{{ sql_json_parse(v.json_text) }}
+
+{%- elif v.__class__.__name__ == "ArrayLiteral" -%}
+{{ sql_array(v.items) }}
+
+{# --- native python containers --- #}
+{%- elif v is sequence and v is not string -%}
+{{ sql_array(v) }}
+
+{%- elif v is string -%}
+{{ sql_string(v) }}
+
+{%- else -%}
+{{ v }}
+{%- endif -%}
+{%- endmacro %}

@@ -1,0 +1,5 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+{% for c in colnames %}
+ALTER TABLE {{ id.fq_table(table) }} DROP COLUMN {{ id.qident(c) }};
+{% endfor %}

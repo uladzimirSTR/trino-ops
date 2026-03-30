@@ -1,0 +1,27 @@
+{# -------- S3 path join (keeps scheme, avoids //) -------- #}
+{% macro s3_join(base, parts) -%}
+{%- set b = (base | string) -%}
+
+{%- if '://' in b -%}
+  {%- set scheme = b.split('://', 1)[0] ~ '://' -%}
+  {%- set rest = b.split('://', 1)[1] -%}
+{%- else -%}
+  {%- set scheme = '' -%}
+  {%- set rest = b -%}
+{%- endif -%}
+
+{%- set rest = rest.strip('/') -%}
+
+{%- set cleaned = [] -%}
+{%- for p in parts -%}
+  {%- if p is not none -%}
+    {%- set s = (p | string).strip('/') -%}
+    {%- if s != '' -%}
+      {%- set _ = cleaned.append(s) -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- set tail = ([rest] if rest != '' else []) + cleaned -%}
+{{ scheme ~ (tail | join('/')) }}
+{%- endmacro %}

@@ -1,0 +1,16 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+{% import "_macros/values.sql.j2" as vals %}
+
+INSERT INTO {{ id.fq_table(table) }} (
+{%- for c in columns -%}
+  {{ id.qident(c) }}{{ ", " if not loop.last else "" }}
+{%- endfor -%}
+)
+VALUES
+{%- for row in rows %}
+  (
+  {%- for v in row -%}
+    {{ vals.sql_value(v) }}{{ ", " if not loop.last else "" }}
+  {%- endfor -%}
+  ){{ "," if not loop.last else "" }}
+{%- endfor %}

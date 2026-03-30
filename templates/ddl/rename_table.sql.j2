@@ -1,0 +1,3 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+ALTER TABLE {{ id.fq_table(table) }} RENAME TO {{ id.qident(new_table_name) }}

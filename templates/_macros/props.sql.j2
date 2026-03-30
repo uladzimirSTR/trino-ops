@@ -1,0 +1,23 @@
+{% import "_macros/values.sql.j2" as vals %}
+
+{# -------- WITH (...) and SET PROPERTIES (...) -------- #}
+
+{% macro with_props(props) -%}
+{%- if props and (props | length) > 0 -%}
+WITH (
+{%- for k, v in props.items() %}
+  {{ k }} = {{ vals.sql_value(v) }}{{ "," if not loop.last else "" }}
+{%- endfor %}
+)
+{%- endif -%}
+{%- endmacro %}
+
+{% macro set_props(props) -%}
+{%- if props and (props | length) > 0 -%}
+SET PROPERTIES (
+{%- for k, v in props.items() %}
+  {{ k }} = {{ vals.sql_value(v) }}{{ "," if not loop.last else "" }}
+{%- endfor %}
+)
+{%- endif -%}
+{%- endmacro %}

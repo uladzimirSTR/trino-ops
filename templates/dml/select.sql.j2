@@ -1,0 +1,11 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+SELECT
+  {{ columns | join(", ") }}
+FROM {{ id.fq_table(table) }}
+{% if where %}WHERE {{ where.sql }}{% endif %}
+{% if order_by and order_by.cols %}ORDER BY {{ order_by.cols | join(", ") }} {{ order_by.otype }}{% endif %}
+{% if limit is not none %}
+
+LIMIT {{ limit }}
+{% endif %}

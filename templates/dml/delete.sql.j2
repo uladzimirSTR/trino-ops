@@ -1,0 +1,4 @@
+{% import "_macros/identifiers.sql.j2" as id %}
+
+DELETE FROM {{ id.fq_table(table) }}
+{% if where %}WHERE {{ where.sql }}{% endif %}
