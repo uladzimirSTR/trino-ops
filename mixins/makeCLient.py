@@ -2,7 +2,7 @@ from __future__ import annotations
 
 # from .interfaces import SqlExecutor
 from ..db.executer import SQLClient
-from trino_crud.mixins import HasConf
+from trino_ops.mixins import HasConf
 
 
 class MakeClientMixin(HasConf):

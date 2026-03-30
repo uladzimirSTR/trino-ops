@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from typing import Any, TypeVar
-from trino_crud.sql import SqlRenderer
+from trino_ops.sql import SqlRenderer
 
-from trino_crud.sql.validators import validate_op
+from trino_ops.sql.validators import validate_op
 
-from trino_crud.configs.ops.ddl import DdlOp
-from trino_crud.configs.ops.dml import DmlOp
-from trino_crud.mixins import (
+from trino_ops.configs.ops.ddl import DdlOp
+from trino_ops.configs.ops.dml import DmlOp
+from trino_ops.mixins import (
     RendersOp,
     ExecutesSql,
     BuildsOp,
@@ -20,11 +20,11 @@ PVar = TypeVar("PVar")
 
 class MakeRenderMixin:
     """
-    Mixin that provides a shared :class:`~trino_crud.sql.SqlRenderer` and a simple
+    Mixin that provides a shared :class:`~trino_ops.sql.SqlRenderer` and a simple
     ``render()`` helper.
 
     The mixin turns operation objects (DDL/DML op instances) into SQL strings using
-    ``trino_crud``'s renderer.
+    ``trino_ops``'s renderer.
 
     Attributes:
         renderer: A reusable ``SqlRenderer`` instance shared by the class.
@@ -48,7 +48,7 @@ class RenderExecMixin(RendersOp, ExecutesSql, BuildsOp, HasContext):
 
     Workflow:
         1) Build an op instance from an operation class and params (:meth:`make_op`).
-        2) Validate the op against a predefined :class:`~trino_crud.sql.validators.ValidationContext`
+        2) Validate the op against a predefined :class:`~trino_ops.sql.validators.ValidationContext`
            (:meth:`execute_op`).
         3) Render the op into SQL and execute it.
 

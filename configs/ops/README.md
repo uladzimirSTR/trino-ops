@@ -11,7 +11,7 @@ These models are later:
 
 ## Directory layout
 
-trino_crud/configs/ops/
+trino_ops/configs/ops/
 ```
 - ddl/        # schema/table definition changes (metadata)
 - dml/        # data manipulation queries

@@ -1,5 +1,5 @@
 [project]
-name = "trino-ops"
+name = "trino_ops"
 version = "0.1.0"
 description = "CRUD for working with trino cluster"
 authors = [

@@ -2,18 +2,18 @@ from __future__ import annotations
 
 from typing import Any
 
-from trino_crud.configs.ops.ddl.schema import (
+from trino_ops.configs.ops.ddl.schema import (
     CreateSchema,
     DropSchema
 )
 
-from trino_crud.configs.ops.ddl.table import (
+from trino_ops.configs.ops.ddl.table import (
     CreateTable,
     DropTable,
     RenameTable
 )
 
-from trino_crud.mixins.interface import (
+from trino_ops.mixins.interface import (
     HasSchemaTableObjects,
     BuildsOp,
     ExecutesOp
@@ -25,7 +25,7 @@ class CreateSchemaMixin(HasSchemaTableObjects, BuildsOp, ExecutesOp):
     Mixin that adds a convenience method for creating a Trino schema.
 
     Expects the host class to provide:
-        - ``self.obj_schema``: a :class:`~trino_crud.configs.TrinoSchema` instance
+        - ``self.obj_schema``: a :class:`~trino_ops.configs.TrinoSchema` instance
         - ``make_op(operation_cls, params)``: builds an op instance
         - ``execute_op(op)``: validates, renders, and executes an op
 
@@ -47,7 +47,7 @@ class DropSchemaMixin(HasSchemaTableObjects, BuildsOp, ExecutesOp):
     Mixin that adds a convenience method for dropping a Trino schema.
 
     Expects the host class to provide:
-        - ``self.obj_schema``: a :class:`~trino_crud.configs.TrinoSchema` instance
+        - ``self.obj_schema``: a :class:`~trino_ops.configs.TrinoSchema` instance
         - ``make_op(...)`` and ``execute_op(...)`` helpers (see :class:`RenderExecMixin`)
 
     Methods:
@@ -73,7 +73,7 @@ class CreateTableMixin(HasSchemaTableObjects, BuildsOp, ExecutesOp):
     Mixin that adds a convenience method for creating a Trino table.
 
     Expects the host class to provide:
-        - ``self.obj_table``: a :class:`~trino_crud.configs.TrinoTableDDL` instance
+        - ``self.obj_table``: a :class:`~trino_ops.configs.TrinoTableDDL` instance
         - ``make_op(...)`` and ``execute_op(...)`` helpers (see :class:`RenderExecMixin`)
 
     Methods:
@@ -96,7 +96,7 @@ class DropTableMixin(HasSchemaTableObjects, BuildsOp, ExecutesOp):
     Mixin that adds a convenience method for dropping a Trino table.
 
     Expects the host class to provide:
-        - ``self.obj_table``: a :class:`~trino_crud.configs.TrinoTableDDL` instance
+        - ``self.obj_table``: a :class:`~trino_ops.configs.TrinoTableDDL` instance
         - ``make_op(...)`` and ``execute_op(...)`` helpers (see :class:`RenderExecMixin`)
 
     Methods:

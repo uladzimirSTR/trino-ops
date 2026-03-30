@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing import Any, Protocol, runtime_checkable, TypeVar
 
-from trino_crud.configs import TrinoSchema, TrinoTableDDL
-from trino_crud.configs.auth import TrinoConnectionConfig
-from trino_crud.configs.ops.ddl import DdlOp
-from trino_crud.configs.ops.dml import DmlOp
-from trino_crud.sql.validators import ValidationContext
+from trino_ops.configs import TrinoSchema, TrinoTableDDL
+from trino_ops.configs.auth import TrinoConnectionConfig
+from trino_ops.configs.ops.ddl import DdlOp
+from trino_ops.configs.ops.dml import DmlOp
+from trino_ops.sql.validators import ValidationContext
 
 
 OpT = TypeVar("OpT", bound=Any)  # если захочешь ужесточить — сделаем Union[DdlOp, DmlOp]

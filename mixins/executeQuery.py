@@ -5,14 +5,14 @@ from typing import Any
 
 
 # from .interfaces import SqlExecutor
-from trino_crud.db.executer import SQLClient
+from trino_ops.db.executer import SQLClient
 
 
 class ExecuteQueryMixin:
     """
     Mixin that provides a convenience method to execute a raw SQL string against Trino.
 
-    The mixin opens an :class:`~trino_crud.db.executer.SQLClient` using ``self.conf``,
+    The mixin opens an :class:`~trino_ops.db.executer.SQLClient` using ``self.conf``,
     executes the provided SQL, and returns all rows as a list of tuples.
 
     Expectations:

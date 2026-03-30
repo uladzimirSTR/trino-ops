@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Mapping, Sequence, Any, Optional, Union
 
-from trino_crud.configs import TrinoSchema, TrinoTableDDL
-from trino_crud.configs import Column, TableProp
+from trino_ops.configs import TrinoSchema, TrinoTableDDL
+from trino_ops.configs import Column, TableProp
 
 
 class MakeSchemaTableMixin:
@@ -12,11 +12,11 @@ class MakeSchemaTableMixin:
 
     This mixin provides small factory methods that turn simple Python inputs
     (strings, sequences, mappings) into strongly-typed config objects used by
-    ``trino_crud``:
+    ``trino_ops``:
 
-    - :class:`~trino_crud.configs.TrinoSchema` for schema references (optionally with a location)
-    - :class:`~trino_crud.configs.TrinoTableDDL` for table DDL definitions
-    - :class:`~trino_crud.configs.TableProp` for table properties (format, partitioning, etc.)
+    - :class:`~trino_ops.configs.TrinoSchema` for schema references (optionally with a location)
+    - :class:`~trino_ops.configs.TrinoTableDDL` for table DDL definitions
+    - :class:`~trino_ops.configs.TableProp` for table properties (format, partitioning, etc.)
 
     Design goals:
         - Reduce repetitive boilerplate when building configs.
@@ -38,7 +38,7 @@ class MakeSchemaTableMixin:
         location: Optional[str] = None,
     ) -> TrinoSchema:
         """
-        Build a :class:`~trino_crud.configs.TrinoSchema`.
+        Build a :class:`~trino_ops.configs.TrinoSchema`.
 
         Args:
             catalog: Trino catalog name (e.g. ``"datalake"``).
@@ -70,7 +70,7 @@ class MakeSchemaTableMixin:
         extra_props: Optional[Mapping[str, Any]] = None,
     ) -> TrinoTableDDL:
         """        
-        Build a :class:`~trino_crud.configs.TrinoTableDDL` definition.
+        Build a :class:`~trino_ops.configs.TrinoTableDDL` definition.
 
         Args:
             schema: Schema object the table belongs to.
@@ -78,7 +78,7 @@ class MakeSchemaTableMixin:
             columns: Column definitions as either ``Column`` objects or
                 ``(colname, coltype)`` tuples.
             format: Storage format (e.g. ``"ORC"``, ``"PARQUET"``), passed into
-                :class:`~trino_crud.configs.TableProp`.
+                :class:`~trino_ops.configs.TableProp`.
             partitioned_by: Optional list of column names to partition by. If provided,
                 each name must exist among ``columns``.
             extra_props: Optional extra table properties passed into ``TableProp``.

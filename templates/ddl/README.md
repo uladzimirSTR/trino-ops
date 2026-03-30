@@ -1,8 +1,8 @@
 # Examples
 
 ```python
-from trino_crud.sql import RenderConfig, SqlRenderer
-from trino_crud.sql.validators import validate_op, validate_plan, ValidationContext, Capabilities
+from trino_ops.sql import RenderConfig, SqlRenderer
+from trino_ops.sql.validators import validate_op, validate_plan, ValidationContext, Capabilities
 
 renderer = SqlRenderer()
 
@@ -25,8 +25,8 @@ ctx = ValidationContext(
 
 ### CREATE SCHEMA
 ```python
-from trino_crud.configs import TrinoSchema
-from trino_crud.configs.ops.ddl.schema import CreateSchema
+from trino_ops.configs import TrinoSchema
+from trino_ops.configs.ops.ddl.schema import CreateSchema
 
 op = CreateSchema(
     table_schema=TrinoSchema(
@@ -48,8 +48,8 @@ WITH (  location = 's3a://prod-datalake/analytics')
 
 ### DROP SCHEMA
 ```python
-from trino_crud.configs import TrinoSchema
-from trino_crud.configs.ops.ddl.schema import DropSchema
+from trino_ops.configs import TrinoSchema
+from trino_ops.configs.ops.ddl.schema import DropSchema
 
 op = DropSchema(
     table_schema=TrinoSchema(
@@ -73,8 +73,8 @@ DROP SCHEMA IF EXISTS "datalake"."analytics"
 
 ### CREATE TABLE
 ```python
-from trino_crud.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
-from trino_crud.configs.ops.ddl.table import CreateTable
+from trino_ops.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
+from trino_ops.configs.ops.ddl.table import CreateTable
 
 schema = TrinoSchema(catalog="datalake", name="analytics", location="s3a://prod-datalake/")
 
@@ -106,8 +106,8 @@ WITH (  format = 'ORC'  partitioned_by = ARRAY['a', 'b']  external_location = 's
 
 ### DROP TABLE
 ```python
-from trino_crud.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
-from trino_crud.configs.ops.ddl.table import DropTable
+from trino_ops.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
+from trino_ops.configs.ops.ddl.table import DropTable
 
 schema = TrinoSchema(catalog="datalake", name="analytics", location="s3a://prod-datalake/")
 
@@ -128,8 +128,8 @@ DROP TABLE IF EXISTS "datalake"."analytics"."events"
 
 ### RENAME TABLE
 ```python
-from trino_crud.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
-from trino_crud.configs.ops.ddl.table import RenameTable
+from trino_ops.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
+from trino_ops.configs.ops.ddl.table import RenameTable
 
 schema = TrinoSchema(catalog="datalake", name="analytics", location="s3a://prod-datalake/")
 
@@ -152,8 +152,8 @@ ALTER TABLE "datalake"."analytics"."events" RENAME TO "new_events"
 
 ### ADD COLUMNS
 ```python
-from trino_crud.configs.ops.ddl.columns import AddColumns
-from trino_crud.configs import TrinoTableRef
+from trino_ops.configs.ops.ddl.columns import AddColumns
+from trino_ops.configs import TrinoTableRef
 
 ref = TrinoTableRef(table_schema=schema, table_name="events")
 
@@ -176,8 +176,8 @@ ADD COLUMN (  "a" varchar,  "b" varchar)
 
 ### DROP COLUMN
 ```python
-from trino_crud.configs.ops.ddl.columns import DropColumns
-from trino_crud.configs import TrinoTableRef
+from trino_ops.configs.ops.ddl.columns import DropColumns
+from trino_ops.configs import TrinoTableRef
 
 ref = TrinoTableRef(table_schema=schema, table_name="events")
 
@@ -198,8 +198,8 @@ ALTER TABLE "datalake"."analytics"."events" DROP COLUMN "b";
 ### RENAME COLUMN
 ```python
 
-from trino_crud.configs.ops.ddl.columns import RenameColumn
-from trino_crud.configs import TrinoTableRef
+from trino_ops.configs.ops.ddl.columns import RenameColumn
+from trino_ops.configs import TrinoTableRef
 
 ref = TrinoTableRef(table_schema=schema, table_name="events")
 
@@ -221,8 +221,8 @@ ALTER TABLE "datalake"."analytics"."events" RENAME COLUMN "a" TO "b"
 
 ### SET PARTITION KEYS
 ```python
-from trino_crud.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
-from trino_crud.configs.ops.ddl.properties import SetPartitioning
+from trino_ops.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
+from trino_ops.configs.ops.ddl.properties import SetPartitioning
 
 schema = TrinoSchema(catalog="datalake", name="analytics", location="s3a://prod-datalake/")
 
@@ -246,8 +246,8 @@ SET PROPERTIES
 
 ### SET TABLE LOCATION
 ```python
-from trino_crud.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
-from trino_crud.configs.ops.ddl.properties import SetTableLocation
+from trino_ops.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
+from trino_ops.configs.ops.ddl.properties import SetTableLocation
 
 schema = TrinoSchema(catalog="datalake", name="analytics", location="s3a://prod-datalake/")
 
@@ -270,8 +270,8 @@ SET PROPERTIES
 
 ### SET FILE FORMAT
 ```python
-from trino_crud.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
-from trino_crud.configs.ops.ddl.properties import SetFileFormat
+from trino_ops.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
+from trino_ops.configs.ops.ddl.properties import SetFileFormat
 
 schema = TrinoSchema(catalog="datalake", name="analytics", location="s3a://prod-datalake/")
 

@@ -6,8 +6,8 @@ from typing import Optional, Union
 from pathlib import Path
 
 # from .interfaces import SqlExecutor
-from trino_crud.configs.auth import BasicAuthConfig
-from trino_crud.mixins import (
+from trino_ops.configs.auth import BasicAuthConfig
+from trino_ops.mixins import (
     MakeConfigMixin,
     MakeClientMixin,
     ExecuteQueryMixin,
@@ -15,7 +15,7 @@ from trino_crud.mixins import (
     MakeSchemaTableMixin,
     RenderExecMixin,
 )
-from trino_crud.sql.validators import (
+from trino_ops.sql.validators import (
     ValidationContext,
     Capabilities
 )

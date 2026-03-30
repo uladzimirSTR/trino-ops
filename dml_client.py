@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from trino_crud import ParentClient
+from trino_ops import ParentClient
 
-from trino_crud.mixins import (
+from trino_ops.mixins import (
     InsertMixin,
     InsertSelectMixin,
     CreateTableAsMixin
@@ -16,7 +16,7 @@ class DMLClient(
     CreateTableAsMixin
 ):
     """
-    Client extension that adds DML-focused helpers on top of :class:`~trino_crud.ParentClient`.
+    Client extension that adds DML-focused helpers on top of :class:`~trino_ops.ParentClient`.
 
     ``DMLClient`` inherits the full “build → validate → render → execute” pipeline from
     ``ParentClient`` and additionally mixes in common data-manipulation operations:
