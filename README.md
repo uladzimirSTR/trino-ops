@@ -86,7 +86,7 @@ Dependencies you should expect:
 ```python
 from __future__ import annotations
 
-from trino_ops import DDLClient
+from trino_ops_utils import DDLClient
 
 conf = DDLClient(
     host="91.98.21.193",
@@ -99,7 +99,7 @@ conf = DDLClient(
         "username": "airflow",
         "password": "SuperPAss",
     },
-    path_to_pem=Path("./trino_ops"),
+    path_to_pem=Path("./trino_ops_utils"),
     file_name_pem="trino.pem",
 )
 
@@ -163,7 +163,7 @@ conf = DMLClient(
         "username": "airflow",
         "password": "SuperPassword",
     },
-    path_to_pem=Path("./trino_ops"),
+    path_to_pem=Path("./trino_ops_utils"),
     file_name_pem="trino.pem",
 )
 ```

@@ -13,7 +13,7 @@ This package intentionally does **not** execute SQL. Execution is handled elsewh
 ## Directory overview
 
 ```
-trino_ops/sql/
+trino_ops_utils/sql/
   renderer.py
   validators.py
 ```
@@ -21,7 +21,7 @@ trino_ops/sql/
 Templates live under the package `templates/` directory (sibling to `sql/`):
 
 ```
-trino_ops/templates/
+trino_ops_utils/templates/
   ddl/
   dml/
   _macros/
@@ -45,7 +45,7 @@ Key design choices:
 ### Public API
 
 ```python
-from trino_ops.sql import SqlRenderer
+from trino_ops_utils.sql import SqlRenderer
 
 renderer = SqlRenderer()
 
@@ -63,7 +63,7 @@ sql_list = renderer.render_many([op1, op2, op3])
 
 Example:
 ```python
-from trino_ops.sql.renderer import SqlRenderer, RenderConfig
+from trino_ops_utils.sql.renderer import SqlRenderer, RenderConfig
 from pathlib import Path
 
 renderer = SqlRenderer(
@@ -80,7 +80,7 @@ renderer = SqlRenderer(
 Ops are mapped to templates by type:
 
 ```python
-from trino_ops.sql.renderer import OP_TEMPLATE
+from trino_ops_utils.sql.renderer import OP_TEMPLATE
 # { CreateTable: "ddl/create_table.sql.j2", Select: "dml/select.sql.j2", ... }
 ```
 
@@ -109,7 +109,7 @@ Example: Hive on S3 is commonly:
 
 Example:
 ```python
-from trino_ops.sql.validators import Capabilities, ValidationContext
+from trino_ops_utils.sql.validators import Capabilities, ValidationContext
 
 ctx = ValidationContext(
     capabilities=Capabilities(
@@ -137,7 +137,7 @@ These are “guardrails” on top of pure capability support.
 ### Public API
 
 ```python
-from trino_ops.sql.validators import validate_op, validate_plan
+from trino_ops_utils.sql.validators import validate_op, validate_plan
 
 validate_op(op, ctx=ctx)          # validates a single op
 validate_plan([op1, op2], ctx=ctx) # validates a list/plan of ops
@@ -163,10 +163,10 @@ If validation fails, a `ValidationError` is raised with a helpful message.
 3) Render SQL via templates
 
 ```python
-from trino_ops.sql import SqlRenderer
-from trino_ops.sql.validators import validate_op, ValidationContext, Capabilities
-from trino_ops.configs import TrinoSchema
-from trino_ops.configs.ops.ddl.schema import CreateSchema
+from trino_ops_utils.sql import SqlRenderer
+from trino_ops_utils.sql.validators import validate_op, ValidationContext, Capabilities
+from trino_ops_utils.configs import TrinoSchema
+from trino_ops_utils.configs.ops.ddl.schema import CreateSchema
 
 renderer = SqlRenderer()
 

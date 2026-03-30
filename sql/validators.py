@@ -17,7 +17,7 @@ from ..configs.ops.dml.update import Update
 from ..configs.ops.dml.merge import Merge
 from ..configs.ops.dml.truncate import Truncate
 from ..configs.ops.dml.ctas import CreateTableAs
-from trino_ops.sql.literals import (
+from trino_ops_utils.sql.literals import (
     SqlExpr,
     Cast,
     RowLiteral,

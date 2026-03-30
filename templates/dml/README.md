@@ -1,8 +1,8 @@
 # Examples
 
 ```python
-from trino_ops.sql import RenderConfig, SqlRenderer
-from trino_ops.sql.validators import validate_op, validate_plan, ValidationContext, Capabilities
+from trino_ops_utils.sql import RenderConfig, SqlRenderer
+from trino_ops_utils.sql.validators import validate_op, validate_plan, ValidationContext, Capabilities
 
 renderer = SqlRenderer()
 
@@ -21,11 +21,11 @@ ctx = ValidationContext(
 )
 ```
 ```python
-from trino_ops.configs.ops.dml.select import SelectQuery, Query
-from trino_ops.configs.ops.dml.common import Where, OrderBy
+from trino_ops_utils.configs.ops.dml.select import SelectQuery, Query
+from trino_ops_utils.configs.ops.dml.common import Where, OrderBy
 
-from trino_ops.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
-from trino_ops.configs.ops.ddl.table import DropTable
+from trino_ops_utils.configs import TrinoTableDDL, Column, TrinoSchema, TableProp
+from trino_ops_utils.configs.ops.ddl.table import DropTable
 
 schema = TrinoSchema(catalog="datalake", name="analytics", location="s3a://prod-datalake/")
 
@@ -75,7 +75,7 @@ select 1
 
 # CREATE AS TABLE
 ```python
-from trino_ops.configs.ops.dml.ctas import CreateTableAs
+from trino_ops_utils.configs.ops.dml.ctas import CreateTableAs
 
 op = CreateTableAs(
     table_schema=schema,
@@ -102,7 +102,7 @@ SELECT * FROM "hive"."analytics"."events" WHERE "dt" >= DATE '2026-01-01'
 
 # DELETE
 ```python
-from trino_ops.configs.ops.dml.delete import Delete
+from trino_ops_utils.configs.ops.dml.delete import Delete
 
 op = Delete(
     table=ref,
@@ -121,7 +121,7 @@ WHERE "dt" >= DATE '2026-01-01'
 
 # INSERT
 ```python
-from trino_ops.configs.ops.dml.insert import InsertValues
+from trino_ops_utils.configs.ops.dml.insert import InsertValues
 
 op = InsertValues(
     table=ref,
@@ -141,7 +141,7 @@ VALUES  ("val1", "val2"),  ("val3", "val4")
 
 # INSERT WITH QUERY
 ```python
-from trino_ops.configs.ops.dml.insert import InsertSelect
+from trino_ops_utils.configs.ops.dml.insert import InsertSelect
 
 op = InsertSelect(
     table=ref,
@@ -161,7 +161,7 @@ Select 1
 
 # TRUNCATE
 ```python
-from trino_ops.configs.ops.dml.truncate import Truncate
+from trino_ops_utils.configs.ops.dml.truncate import Truncate
 
 op = Truncate(
     table=ref,

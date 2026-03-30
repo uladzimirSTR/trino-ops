@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from trino_ops import ParentClient
+from trino_ops_utils import ParentClient
 
-from trino_ops.mixins import (
+from trino_ops_utils.mixins import (
     CreateSchemaMixin, 
     DropSchemaMixin,
     CreateTableMixin,
@@ -18,7 +18,7 @@ class DDLClient(
     DropTableMixin,
 ):
     """
-    Client extension that adds DDL-focused helpers on top of :class:`~trino_ops.ParentClient`.
+    Client extension that adds DDL-focused helpers on top of :class:`~trino_ops_utils.ParentClient`.
 
     ``DDLClient`` inherits the core pipeline from ``ParentClient`` (config building, validation,
     rendering, and execution) and mixes in common schema/table DDL operations:

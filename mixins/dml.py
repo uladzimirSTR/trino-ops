@@ -2,13 +2,13 @@ from __future__ import annotations
 
 from typing import Any, Optional, Sequence
 
-from trino_ops.configs import TrinoSchema
-from trino_ops.configs.table import Column
+from trino_ops_utils.configs import TrinoSchema
+from trino_ops_utils.configs.table import Column
 
-from trino_ops.configs.ops.dml.insert import InsertValues, InsertSelect
-from trino_ops.configs.ops.dml.ctas import CreateTableAs
+from trino_ops_utils.configs.ops.dml.insert import InsertValues, InsertSelect
+from trino_ops_utils.configs.ops.dml.ctas import CreateTableAs
 
-from trino_ops.mixins.interface import (
+from trino_ops_utils.mixins.interface import (
     HasSchemaTableObjects,
     BuildsOp,
     ExecutesOp

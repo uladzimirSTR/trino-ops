@@ -16,7 +16,7 @@ class DMLClient(
     CreateTableAsMixin
 ):
     """
-    Client extension that adds DML-focused helpers on top of :class:`~trino_ops.ParentClient`.
+    Client extension that adds DML-focused helpers on top of :class:`~trino_ops_utils.ParentClient`.
 
     ``DMLClient`` inherits the full “build → validate → render → execute” pipeline from
     ``ParentClient`` and additionally mixes in common data-manipulation operations:
